@@ -1,70 +1,76 @@
-import { useEffect } from 'react';
-import { nanoid } from 'nanoid';
+// import { useEffect } from 'react';
+// import { nanoid } from 'nanoid';
+// import { useSelector } from 'react-redux';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
 import { GlobalStyle } from './GlobalStyle';
 import { Layout, TitlePhonebook, TitleContacts } from './Layout';
-import { useState } from 'react';
+// import {getContacts} from 'redux/selectors'
+// import { useState } from 'react';
 
 
-export default function App () {
-  const [contacts, setContacts] = useState(JSON.parse(window.localStorage.getItem('contacts')) ?? []);
-  const [filter, setFilter] = useState('');
+export default function App() {
+  // const contacts = useSelector(getContacts);
 
-  useEffect(() => {
-    window.localStorage.setItem('contacts', JSON.stringify(contacts))
-  }, [contacts]);
 
-  const addContact = ({ name, number }) => {
-    const newContact = {
-      id: nanoid(),
-      name,
-      number,
-    };
+    // const [contacts, setContacts] = useState(JSON.parse(window.localStorage.getItem('contacts')) ?? []);
+  //  const [filter, setFilter] = useState('');
 
-    const isExist = contacts.some(
-      evt =>
-        (evt.name === newContact.name && evt.number === newContact.number) ||
-        evt.number === newContact.number
-    );
+  // useEffect(() => {
+  //   window.localStorage.setItem('contacts', JSON.stringify(contacts))
+  // }, [contacts]);
 
-    if (isExist) {
-      alert(`${name} or ${number} is already in contacts.`);
-      return;
-    }
+  // const addContact = ({ name, number }) => {
+  //   const newContact = {
+  //     id: nanoid(),
+  //     name,
+  //     number,
+  //   };
 
-    setContacts(prevState => [...prevState, newContact]);
-  };
+  //   const isExist = contacts.some(
+  //     evt =>
+  //       (evt.name === newContact.name && evt.number === newContact.number) ||
+  //       evt.number === newContact.number
+  //   );
 
-  const changeFilter = ({ currentTarget }) => {
-    setFilter(currentTarget.value);
-  };
+  //   if (isExist) {
+  //     alert(`${name} or ${number} is already in contacts.`);
+  //     return;
+  //   }
 
-  const getFilteredConracts = () => {
-    return contacts.filter(contact => {
-      return contact.name
-        .toLowerCase()
-        .includes(filter.toLowerCase());
-    });
-  };
+  //   setContacts(prevState => [...prevState, newContact]);
+  // };
 
-  const deleteContact = id => {
-    setContacts(prevState => prevState.filter(contact => contact.id !== id));
-  };
+  // const changeFilter = ({ currentTarget }) => {
+  //   setFilter(currentTarget.value);
+  // };
+
+  // const getFilteredConracts = () => {
+  //   return contacts.filter(contact => {
+  //     return contact.name
+  //       .toLowerCase()
+  //       .includes(filter.toLowerCase());
+  //   });
+  // };
+
+  // const deleteContact = id => {
+  //   setContacts(prevState => prevState.filter(contact => contact.id !== id));
+  // };
 
     return (
       <Layout>
         <GlobalStyle />
 
         <TitlePhonebook>Phonebook</TitlePhonebook>
-        <ContactForm onSubmit={addContact} />
+        <ContactForm />
 
         <TitleContacts>Contacts</TitleContacts>
-        <Filter value={filter} onChange={changeFilter} />
+        <Filter />
+        {/* <Filter value={filter} onChange={changeFilter} /> */}
         <ContactList
-          contacts={getFilteredConracts()}
-          onDelete={deleteContact}
+          // contacts={getFilteredConracts()}
+          // onDelete={deleteContact}
         />
       </Layout>
     );

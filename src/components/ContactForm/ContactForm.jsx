@@ -1,7 +1,12 @@
 import { Formik } from 'formik';
-import { Form, Field, FormBtn, ErrorMessage, } from './ContactForm.styled';
+import { useSelector, useDispatch } from 'react-redux';
+import { getContacts } from 'redux/selectors';
+import {addContact} from 'redux/contactsSlice'
 import * as yup from 'yup';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
+
+import { Form, Field, FormBtn, ErrorMessage } from './ContactForm.styled';
+
 
 const ContactSchema = yup.object().shape({
     name: yup.string().trim().matches(/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
@@ -15,16 +20,36 @@ const initialValues = {
     number: '',
 }
 
-export const ContactForm = ({ onSubmit }) => {
+export const ContactForm = () => {
+    const contacts = useSelector(getContacts);
+    const dispatch = useDispatch();
+
+      const handleSubmit = (values, { resetForm }) => {
+        const check = contacts.filter(
+          contact => contact.name.toLowerCase() === values.name.toLowerCase()
+        );
+        if (check.length) {
+          alert(`${values.name} is already in contacts`);
+        } else {
+          dispatch(addContact(values));
+          resetForm({
+            name: '',
+            number: '',
+          });
+        }
+      };
 
     return (
     <Formik 
     initialValues={initialValues} 
     validationSchema={ContactSchema}
-    onSubmit = {(contacts, {resetForm}) => {
-        onSubmit({ ...contacts, id: nanoid(), })
-        resetForm();
-    }}>
+    // onSubmit = {(contacts, {resetForm}) => {
+    //     onSubmit({ ...contacts, id: nanoid(), })
+    //     resetForm();
+    //         }
+      onSubmit={(values, actions) => {
+        handleSubmit(values, actions);
+      }}>
     
         <Form>
             <label>
