@@ -8,7 +8,7 @@ import {
   ContactListItemsBtn,
 } from './ContactList.styled';
 
-export const ContactListItem = ({ id, name, number }) => {
+export const ContactListItem = ({ name, number, id }) => {
   const dispatch = useDispatch();
 
   return (

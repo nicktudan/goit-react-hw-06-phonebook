@@ -12,13 +12,13 @@ export const ContactList = () => {
   return (
     <ContactsList>
       {contacts.length > 0 &&
-        contacts.map(contact => {
+        contacts.map(contact  => {
           return (
             <ContactListItem
               key={contact.id}
-              id={contact.id}
               name={contact.name}
               number={contact.number}
+              id={contact.id}
             />
           );
         })}
