@@ -40,10 +40,10 @@ export const ContactForm = () => {
         // }
         
     const isExist = contacts.some(
-      evt =>
-        (evt.name.toLowerCase() === newContact.name.toLowerCase() &&
-          evt.number === newContact.number) ||
-        evt.number === newContact.number
+      contact =>
+        (contact.name.toLowerCase() === newContact.name.toLowerCase() &&
+          contact.number === newContact.number) ||
+        contact.number === newContact.number
     );
     if (isExist) {
       alert(
