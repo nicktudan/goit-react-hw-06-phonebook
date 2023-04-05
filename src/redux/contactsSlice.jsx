@@ -11,10 +11,9 @@ const contactsSlice = createSlice({
   initialState: contactsInitialState,
   reducers: {
     addContact: {
-      reduser(state, action) {
-      // state.items.push(action.payload);
-      state.items = [...state.items, action.payload];
-    },
+      reducer(state, action) {
+        state.items = [...state.items, action.payload];
+      },
       prepare(newContact) {
         return {
           payload: {
@@ -24,10 +23,7 @@ const contactsSlice = createSlice({
         };
       },
     },
-    
     deleteContact(state, action) {
-      // const index = state.findIndex(({ id }) => id === action.payload);
-      // state.splice(index, 1);
       state.items = state.items.filter(item => item.id !== action.payload);
     },
   },

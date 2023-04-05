@@ -1,6 +1,5 @@
 import { Formik } from 'formik';
 import * as yup from 'yup';
-// import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contactsSlice';
 import { selectContacts } from 'redux/selectors';
@@ -25,19 +24,6 @@ export const ContactForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (newContact, { resetForm }) => {
-      // const newContact = {
-      //     id: nanoid(),
-      //     name,
-      //     number,
-      // };
-        // const normalizedQuery = query.toLowerCase().trim();
-        // const isExist = todos.find(
-        //   item => item.text.toLowerCase() === normalizedQuery
-        // );
-        // if (isExist) {
-        //   alert(`ToDo ${query} is alredy exist`);
-        //   return;
-        // }
         
     const isExist = contacts.some(
       contact =>
